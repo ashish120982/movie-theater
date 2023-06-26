@@ -1,22 +1,20 @@
 package com.jpmc.theater;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.jpmc.theater.model.Reservation;
+import com.jpmc.theater.model.Theater;
+
+@SpringBootTest
 public class TheaterTests {
     @Test
     void totalFeeForCustomer() {
-        Theater theater = new Theater(LocalDateProvider.singleton());
-        Customer john = new Customer("John Doe", "id-12345");
-        Reservation reservation = theater.reserve(john, 2, 4);
-//        System.out.println("You have to pay " + reservation.getTotalFee());
+        Theater theater = new Theater();
+        Reservation reservation = new Reservation("Customer1001", theater.getShowBySequence(2), 4);
         assertEquals(reservation.totalFee(), 50);
     }
 
-    @Test
-    void printMovieSchedule() {
-        Theater theater = new Theater(LocalDateProvider.singleton());
-        theater.printSchedule();
-    }
 }
