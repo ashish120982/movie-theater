@@ -4,17 +4,22 @@ import com.jpmc.theater.utils.PrintStringUtils;
 
 public enum PrintFormat {
 	JSON {
-		public void printSchedules(Theater theater) {
-			System.out.println(PrintStringUtils.convertToJson(theater));
+		public String printSchedules(Theater theater) {
+			return PrintStringUtils.convertToJson(theater);
 		}
-	},TEXT {
-		public void printSchedules(Theater theater) {
-			theater.getSchedules()
-			.forEach(s -> System.out.println(s.getSequenceOfTheDay() + ": " + s.getShowStartTime() + " "
-					+ s.getMovie().getTitle() + " " + PrintStringUtils.humanReadableFormat(s.getMovie().getRunningTime()) + " $"
-					+ s.getMovie().getBaseTicketPrice()));
+	},
+	TEXT {
+		public String printSchedules(Theater theater) {
+			StringBuffer sb = new StringBuffer();
+			theater.getSchedules().forEach(s -> {
+				sb.append(s.getSequenceOfTheDay() + ": " + s.getShowStartTime() + " " + s.getMovie().getTitle() + " "
+						+ PrintStringUtils.humanReadableFormat(s.getMovie().getRunningTime()) + " $"
+						+ s.getTicketPrice());
+				sb.append(System.getProperty("line.separator"));
+			});
+			return sb.toString();
 		}
 	};
 
-	public abstract void printSchedules(Theater theater);
+	public abstract String printSchedules(Theater theater);
 }

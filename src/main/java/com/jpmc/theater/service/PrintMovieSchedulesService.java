@@ -10,7 +10,7 @@ public class PrintMovieSchedulesService {
 	public void printSchedule(Theater theater, PrintFormat format) {
 		System.out.println(LocalDate.now());
 		System.out.println("===================================================");
-		format.printSchedules(theater);
+		System.out.println(format.printSchedules(theater));
 		System.out.println("===================================================");
 	}
 
