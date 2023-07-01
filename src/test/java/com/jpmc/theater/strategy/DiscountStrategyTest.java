@@ -22,7 +22,7 @@ public class DiscountStrategyTest {
     @Test
     void testMovieShowWithDiscountCode() {
         Movie spiderMan = new Movie("Spider-Man: No Way Home", Duration.ofMinutes(90),new BigDecimal(12.5), 1);
-        Show show = new Show(spiderMan, 5, LocalDateTime.of(LocalDate.now(), LocalTime.now()));
+        Show show = new Show(spiderMan, 5, LocalDateTime.of(LocalDate.of(2023, 6, 26), LocalTime.of(21, 0)));
         assertEquals(new BigDecimal(10).setScale(2, RoundingMode.HALF_EVEN), show.getTicketPrice());
     }
     

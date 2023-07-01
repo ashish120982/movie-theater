@@ -10,7 +10,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.jpmc.theater.model.Movie;
@@ -41,13 +42,10 @@ public class PrintMovieSchedulesServiceTest {
 		theater = new Theater(schedules);
 	}
 	
-    @Test
-    void testPrintMovieScheduleInJson() {
-    	assertThat(PrintFormat.JSON.printSchedules(theater).contains("1: 2023-06-27T09:00 Turning Red (1 hour 25 minutes) $8.00"));
+    @ParameterizedTest
+    @EnumSource(PrintFormat.class)
+    void testPrintMovieScheduleFormats(PrintFormat format) {
+    	assertThat(format.printSchedules(theater).contains("1: 2023-06-27T09:00 Turning Red (1 hour 25 minutes) $8.00"));
     }
-    
-    @Test
-    void testPrintMovieScheduleInText() {
-    	assertThat(PrintFormat.TEXT.printSchedules(theater).contains("1: 2023-06-27T09:00 Turning Red (1 hour 25 minutes) $8.00"));
-    }
+
 }
