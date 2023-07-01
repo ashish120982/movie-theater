@@ -42,12 +42,12 @@ public class PrintMovieSchedulesServiceTest {
 	}
 	
     @Test
-    void printMovieScheduleInJson() {
+    void testPrintMovieScheduleInJson() {
     	assertThat(PrintFormat.JSON.printSchedules(theater).contains("1: 2023-06-27T09:00 Turning Red (1 hour 25 minutes) $8.00"));
     }
     
     @Test
-    void printMovieScheduleInText() {
+    void testPrintMovieScheduleInText() {
     	assertThat(PrintFormat.TEXT.printSchedules(theater).contains("1: 2023-06-27T09:00 Turning Red (1 hour 25 minutes) $8.00"));
     }
 }
